@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <body>
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>Email</td>
+                <td>Message</td>
+                <td>Subject</td>
+            </tr>
+            <hr>
+            {% for contact in contacts%}
+            <tr>
+                <td> {{contact.id}} </td>
+                <td> {{contact.email_from}} </td>
+                <td> {{contact.message}} </td>
+                <td> {{contact.subject}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+    </html>
+{% endblock content %}
