@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav>
+    <a href='/source/create/'>Source Create</a>
+</nav>
+    <body>
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>URL</td>
+                <td>Name</td>
+                <td>Contact namber</td>
+            </tr>
+            {% for source in source %}
+            <tr>
+                <td> {{ source.id }} </td>
+                <td> {{ source.source_url }} </td>
+                <td> {{ source.name }} </td>
+                <td> {{ source.contact_namber }} </td>
+                <td> <a href='/source/update/{{source.id}}/'>Edit</a> <td>
+                <td> <a href='/source/delete/{{source.id}}/'>Delete</a> <td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+{% endblock content %}

@@ -13,3 +13,9 @@ class Rate(models.Model):
     created = models.DateTimeField()
     buy = models.DecimalField(max_digits=10, decimal_places=2)
     sale = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+class Source(models.Model):
+    source_url = models.CharField(max_length=255)
+    name = models.CharField(max_length=64)
+    contact_namber = models.CharField(max_length=15)
