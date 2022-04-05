@@ -1,5 +1,7 @@
 django
+django-debug-toolbar
 django-extensions
+ipython
 
 # flake8
 flake8

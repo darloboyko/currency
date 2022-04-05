@@ -4,16 +4,16 @@
 
 <head>
     <meta charset = "UTF-8">
-    <title>Contacts</title>
+    <title>Currency</title>
 </head>
 
 <body>
 
 <nav>
-    <a href='/'>Home</a>
-    <a href='/contacts/list/'>ContactUs</a>
-    <a href='/rates/list/'>Rates</a>
-    <a href='/source/list/'>Source</a>
+    <a href= '{% url 'index' %}' >Home</a>
+    <a href= '{% url 'currency:contact_list' %}' >ContactUs</a>
+    <a href= '{% url 'currency:rate_list' %}' >Rates</a>
+    <a href= '{% url 'currency:source_list' %}' >Source</a>
 </nav>
 
 {% block content %}
