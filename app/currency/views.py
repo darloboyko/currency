@@ -1,19 +1,50 @@
-from currency.forms import Source, SourceForm
-from currency.models import ContactUs, Rate
+from currency.forms import SourceForm
+from currency.models import ContactUs, ContactUsCreate, Rate, Source
 
-from django.shortcuts import render
+from django.conf import settings
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 
-def contact_list(request):
-    contacts = ContactUs.objects.all()
-    return render(request, 'contact_list.html', context={'contacts': contacts})
+class ContactUsList(ListView):
+    queryset = ContactUs.objects.all()
+    template_name = 'contact_list.html'
 
 
-def rate_list(request):
-    rates = Rate.objects.all()
-    return render(request, 'rate_list.html', context={'rates': rates})
+class ContactUsCreate(CreateView):
+    model = ContactUsCreate
+    template_name = "contactus_create.html"
+    success_url = reverse_lazy('index')
+    fields = ('name', 'reply_to', 'subject', 'body')
+
+    def _send_email(self):
+        recipient = settings.DEFAULT_FROM_EMAIL
+        subject = 'User ContactUs'
+        body = f'''
+            Request From: {self.object.name}
+            Email to reply: {self.object.reply_to}
+            Subject: {self.object.subject}
+
+            Body: {self.object.body}
+        '''
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.DEFAULT_FROM_EMAIL],
+            fail_silently=False
+        )
+
+    def form_valid(self, form):
+        redirect = super().form_valid(form)
+        self._send_email()
+        return redirect
+
+
+class RateList(ListView):
+    queryset = Rate.objects.all()
+    template_name = 'rate_list.html'
 
 
 class SourceList(ListView):
