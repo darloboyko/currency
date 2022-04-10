@@ -19,7 +19,6 @@ class ContactUsCreate(CreateView):
     fields = ('name', 'reply_to', 'subject', 'body')
 
     def _send_email(self):
-        recipient = settings.DEFAULT_FROM_EMAIL
         subject = 'User ContactUs'
         body = f'''
             Request From: {self.object.name}
