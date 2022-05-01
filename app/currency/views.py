@@ -2,6 +2,7 @@ from currency.forms import SourceForm
 from currency.models import ContactUs, ContactUsCreate, Rate, Source
 
 from django.conf import settings
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -63,14 +64,20 @@ class SourceCreate(CreateView):
     success_url = reverse_lazy('currency:source_list')
 
 
-class SourceUpdate(UpdateView):
+class SourceUpdate(UserPassesTestMixin, UpdateView):
     model = Source
     template_name = 'source_update.html'
     form_class = SourceForm
     success_url = reverse_lazy('currency:source_list')
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class SourceDelete(DeleteView):
+
+class SourceDelete(UserPassesTestMixin, DeleteView):
     model = Source
     template_name = 'source_delete.html'
     success_url = reverse_lazy('currency:source_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
