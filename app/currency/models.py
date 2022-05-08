@@ -1,4 +1,15 @@
+from currency import model_choices as mch
+
 from django.db import models
+
+
+class Source(models.Model):
+    source_url = models.CharField(max_length=255)
+    name = models.CharField(max_length=64, unique=True)
+    contact_namber = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.name
 
 
 class ContactUs(models.Model):
@@ -17,14 +28,8 @@ class ContactUsCreate(models.Model):
 
 
 class Rate(models.Model):
-    type = models.EmailField(max_length=5)  # noqa: A003
-    source = models.CharField(max_length=64)
-    created = models.DateTimeField()
+    type = models.CharField(max_length=5, choices=mch.RateType.choices)  # noqa: A003
+    created = models.DateTimeField(auto_now_add=True)
     buy = models.DecimalField(max_digits=10, decimal_places=2)
     sale = models.DecimalField(max_digits=10, decimal_places=2)
-
-
-class Source(models.Model):
-    source_url = models.CharField(max_length=255)
-    name = models.CharField(max_length=64)
-    contact_namber = models.CharField(max_length=15)
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)

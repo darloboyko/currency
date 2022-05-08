@@ -1,4 +1,4 @@
-from currency.models import Source
+from currency.models import Rate, Source
 
 from django import forms
 
@@ -7,3 +7,9 @@ class SourceForm(forms.ModelForm):
     class Meta:
         model = Source
         fields = ('source_url', 'name', 'contact_namber')
+
+
+class RateForm(forms.ModelForm):
+    class Meta:
+        model = Rate
+        fields = ('type', 'source', 'buy', 'sale')

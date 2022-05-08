@@ -151,3 +151,7 @@ DEFAULT_FROM_EMAIL = 'dahatest8@gmail.com'
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 AUTH_USER_MODEL = 'accounts.User'
+
+# Custom settings
+DOMAIN = 'localhost:8000'
+HTTP_SCHEMA = 'http'
