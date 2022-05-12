@@ -1,19 +1,45 @@
-<nav>
-    <a href= '{% url "index" %}' >Home</a>
-    <a href= '{% url "currency:contactus_create" %}'>Create Contact</a>
-    <a href= '{% url "currency:contact_list" %}' >ContactUs</a>
-    <a href= '{% url "currency:rate_list" %}' >Rates</a>
-    <a href= '{% url "currency:source_list" %}' >Source</a>
+{% load static %}
 
-    {% if request.user.is_authenticated %}
-        Name: {{ request.user.first_name }} {{ request.user.last_name }}
-        ID: {{ request.user.id }}
-        <a href= '{% url "accounts:my-profile" request.user.id %}'>My Profile</a>
-        <a href= '{% url "password_change" %}' >Change Password</a>
-        <a href= '{% url "logout" %}'>Logout</a>
-    {% else %}
-        <a href= '{% url "accounts:signup" %}' >Sign up</a>
-        <a href= '{% url "login" %}'>Login</a>
-    {% endif %}
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'currency:contactus_create' %}">Create Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='{% url "currency:contact_list" %}'>ContactUs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='{% url "currency:rate_list" %}'>Rates</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='{% url "currency:source_list" %}'>Source</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+            {% if request.user.is_authenticated %}
+                {% if request.user.avatar %}
+                    <img src="{{ request.user.avatar_url }}" class="rounded-circle" width="50" height="50">
+                {% else %}
+                    <img src="{% static 'img/def_avatar.png' %}" class="rounded-circle" width="50" height="50">
+                {% endif %}
+                <a href='{% url "accounts:my-profile" request.user.id %}' class="btn btn-secondary">My Profile</a>
+                <a href='{% url "password_change" %}' class="btn btn-secondary">Change Password</a>
+                <a href='{% url "logout" %}' class="btn btn-secondary">Logout</a>
+            {% else %}
+                <a href='{% url "accounts:signup" %}' class="btn btn-secondary"> Sign up</a>
+                <a href='{% url "login" %}' class="btn btn-secondary"> Login</a>
+            {% endif %}
+            </span>
+        </div>
+    </div>
 </nav>
