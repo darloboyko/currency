@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <body>
-        <table>
+<body>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>Id</td>
-                <td>Email</td>
-                <td>Message</td>
-                <td>Subject</td>
+                <th scope="col">Id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Message</th>
+                <th scope="col">Subject</th>
             </tr>
-            <hr>
+            </thead>
             {% for contact in contact_list %}
+            <tbody>
             <tr>
-                <td> {{contact.id}} </td>
-                <td> {{contact.email_from}} </td>
-                <td> {{contact.message}} </td>
-                <td> {{contact.subject}} </td>
+                <th scope="row">{{contact.id}}</th>
+                <td>{{contact.email_from}}</td>
+                <td>{{contact.message}}</td>
+                <td>{{contact.subject}}</td>
             </tr>
+            </tbody>
             {% endfor %}
         </table>
-    </body>
+    </div>
+</div>
+</body>
 {% endblock content %}
