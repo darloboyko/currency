@@ -1,8 +1,14 @@
 django
+celery
+requests
+beautifulsoup4
+
+# dev
 django-debug-toolbar
 django-extensions
 django-crispy-forms
 ipython
+
 
 # flake8
 flake8

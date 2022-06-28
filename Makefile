@@ -10,3 +10,9 @@ shell:
 
 run:
 	$(manage_py) runserver
+
+worker:
+	cd app && celery -A settings worker -l info --autoscale 1,10
+
+beat:
+	cd app && celery -A settings beat -l info
