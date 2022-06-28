@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block content %}
     <p>
         Id: {{source.id}} <br>
         URL: {{source.source_url}} <br>
+            {% if source.logo_bank %}
+                <img src="{{ source.logo_bank.url }}" class="rounded d-block"  width="30" height="30" class="rounded">
+            {% else %}
+                <img src="{% static 'img/no_logo.jpg' %}" class="rounded d-block" width="30" height="30" class="rounded">
+            {% endif %}
         Name: {{source.name}} <br>
         Contact namber: {{source.contact_namber}} <br>
     </p>

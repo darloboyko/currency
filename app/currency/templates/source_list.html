@@ -26,11 +26,11 @@
                 <th scope="row">{{ source.id }}</th>
                 <td> {{ source.source_url }}</td>
                 <td>
-                {% if source.id == 2 %}
-                    <img src="{% static 'img/privatbank.logo.jpg' %}" class="rounded d-block" width="30" height="30" class="rounded">
-                {% else %}
-                    <img src="{% static 'img/mono.logo.jpg' %}" class="rounded d-block" width="30" height="30" class="rounded">
-                {% endif %}
+                    {% if source.logo_bank %}
+                        <img src="{{ source.logo_bank.url }}" class="rounded d-block"  width="30" height="30" class="rounded">
+                    {% else %}
+                        <img src="{% static 'img/no_logo.jpg' %}" class="rounded d-block" width="30" height="30" class="rounded">
+                    {% endif %}
                 </td>
                 <td> {{ source.name }}</td>
                 <td> {{ source.contact_namber }}</td>

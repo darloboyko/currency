@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block content %}
     <div class="row">
         <div class="col">
@@ -12,11 +13,13 @@
                 <thead>
                 <tr>
                     <td scope="col">Id</td>
-                    <td scope="col">Type</td>
+                    <td scope="col"> </td>
                     <td scope="col">Source</td>
-                    <td scope="col"> Created</td>
+                    <td scope="col">Base Currency</td>
+                    <td scope="col">Type</td>
                     <td scope="col">Buy</td>
                     <td scope="col">Sale</td>
+                    <td scope="col"> Created</td>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -24,11 +27,19 @@
                 {% for rate in rate_list %}
                     <tr>
                     <th scope="row">{{rate.id}}</th>
-                    <td> {{ rate.get_type_display }}</td>
+                    <td>
+                        {% if rate.source.logo_bank %}
+                            <img src="{{ rate.source.logo_bank.url }}" class="rounded d-block"  width="30" height="30" class="rounded">
+                        {% else %}
+                            <img src="{% static 'img/no_logo.jpg' %}" class="rounded d-block" width="30" height="30" class="rounded">
+                        {% endif %}
+                    </td>
                     <td> {{ rate.source.name }}</td>
-                    <td> {{ rate.created }}</td>
+                    <td> {{ rate.get_base_type_display }}</td>
+                    <td> {{ rate.get_type_display }}</td>
                     <td> {{ rate.buy }}</td>
                     <td> {{ rate.sale }}</td>
+                    <td> {{ rate.created }}</td>
                     <td>
                         <div class="nav-item dropdown">
                             <button class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
