@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'crispy_forms',
+    'django_filters',
 
     'accounts',
     'currency',
@@ -168,7 +169,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CELERY_BROKER_URL = f'amqp://guest:guest@localhost:5672//'
+CELERY_BROKER_URL = f'amqp://guest:guest@localhost:5672//' # noqa:  F541
 CELERY_BEAT_SCHEDULE = {
     'parse_privatbank': {
         'task': 'currency.tasks.parse_privatbank',
